@@ -1,0 +1,181 @@
+body {
+  background-color: black;
+  color: white;
+}
+
+.review-image {
+  overflow: hidden;
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+}
+.review-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.see-more {
+  background-color: black;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+.see-more:hover {
+  color: #ec008c;
+  text-decoration: underline;
+}
+.common-btn {
+  background: #ec008c;
+  background: -webkit-linear-gradient(to right, #fc6767, #ec008c);
+  background: linear-gradient(to right, #fc6767, #ec008c);
+  color: white;
+}
+.common-btn:hover {
+  background: #ff0199;
+  background: -webkit-linear-gradient(to right, #fc5151, #ff029a);
+  background: linear-gradient(to right, #fc4141, #ff019a);
+  color: white;
+}
+
+.title-text {
+  color: #ec008c;
+}
+
+.link-decoration:hover {
+  color: #ec008c;
+  cursor: pointer;
+}
+
+.product-card {
+  height: 400px;
+  width: 400px;
+}
+
+.product-image {
+  height: 250px;
+  overflow: hidden;
+}
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.product-details {
+  height: 115px;
+  overflow: hidden;
+}
+
+.product-details p {
+  line-height: 9px;
+}
+
+.product-details h3 {
+  height: 40px;
+  overflow: hidden;
+}
+
+.orderListCart {
+  display: flex;
+}
+.orderImage {
+  width: 500px;
+  height: 250px;
+  overflow: hidden;
+}
+.orderImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.orderDetail {
+  width: 575px;
+  padding: 20px;
+}
+
+.auth-card {
+  height: 100vh;
+}
+
+.auth-main-cart {
+  border: 1px solid grey;
+  border-radius: 13px;
+  padding: 50px;
+}
+
+.input-field {
+  color: white;
+  border: none;
+  margin-bottom: 20px;
+  width: 400px;
+  background-color: black;
+  border: 1px solid grey;
+}
+
+.register-link {
+  text-decoration: none;
+}
+
+.register-link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 688px) {
+  .auth-main-cart {
+    padding: 10px;
+    border: none;
+  }
+}
+
+.message-input {
+  width: 100%;
+  height: 45px;
+  color: white;
+  border: none;
+  margin-bottom: 20px;
+  background-color: black;
+  border: 1px solid grey;
+  overflow: hidden;
+}
+
+.payment-card {
+  border: 1px solid gray;
+  display: flex;
+  width: 30rem;
+}
+
+.payment-img {
+  width: 150px;
+  height: 100px;
+}
+.payment-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.payment-detail {
+  /* border: 1px solid green; */
+  width: 100%;
+  padding: 8px;
+}
+
+li a {
+  text-decoration: none;
+  color: white;
+}
+
+.payment-h3 {
+  /* border: 1px solid red; */
+  height: 35px;
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 688px) {
+  .order-summery-card {
+    text-align: center;
+  }
+}
