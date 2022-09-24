@@ -7,7 +7,8 @@ import {
   useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
-import auth from "../../firebase.init";
+import { auth, db } from "../../firebase.init";
+import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 
 const Registration = () => {
   const [name, setName] = useState();
@@ -20,7 +21,7 @@ const Registration = () => {
 
   const from = location.state?.from?.pathname || "/";
 
-  const [createUserWithEmailAndPassword, user] =
+  const [createUserWithEmailAndPassword, user, loading] =
     useCreateUserWithEmailAndPassword(auth);
 
   if (user) {
@@ -37,14 +38,25 @@ const Registration = () => {
     setPassword(event.target.value);
   };
 
-  const handleCreateUser = (event) => {
+  const handleCreateUser = async (event) => {
     event.preventDefault();
-
     if (password.length < 6) {
       setError("Password must be 6 characters or longer");
       return;
     }
-    createUserWithEmailAndPassword(email, password);
+    try {
+      const docRef = await addDoc(collection(db, "users"), {
+        name: name,
+        email: email,
+        create: new Date(),
+      });
+      await updateDoc(doc(db, "users", docRef.id), {
+        id: docRef.id,
+      });
+      createUserWithEmailAndPassword(email, password);
+    } catch (e) {
+      alert(e);
+    }
   };
 
   const [signInWithGoogle, done] = useSignInWithGoogle(auth);
@@ -103,6 +115,7 @@ const Registration = () => {
               />
             </form>
             <p style={{ color: "red" }}>{error}</p>
+            {loading && <p className="text-center">Loading...</p>}
             <div>
               <button
                 onClick={() => signInWithGoogle()}

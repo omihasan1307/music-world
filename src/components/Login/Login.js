@@ -5,7 +5,8 @@ import {
 } from "react-firebase-hooks/auth";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import auth from "../../firebase.init";
+// import auth from "../../firebase.init";
+import { auth } from "../../firebase.init";
 import Footer from "../Footer/Footer";
 
 const Login = () => {

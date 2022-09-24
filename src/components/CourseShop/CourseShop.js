@@ -8,7 +8,7 @@ const CourseShop = () => {
   const [courses] = useProduct();
   const [cart, setCart] = useState([]);
 
-  const course = courses.filter((element) => element.category === "course");
+  const course = courses.filter((element) => element.category === "Course");
 
   const handleAddToCart = (item) => {
     const newCart = [...cart, item];

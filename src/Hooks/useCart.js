@@ -9,9 +9,7 @@ const useCart = (products) => {
       const savedCart = getStoredCart();
       const storedCart = [];
       for (const key in savedCart) {
-        const addedProduct = products.find(
-          (product) => product.id === parseInt(key)
-        );
+        const addedProduct = products.find((product) => product.id === key);
         if (addedProduct) {
           // set quantity
           const quantity = savedCart[key];

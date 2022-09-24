@@ -7,16 +7,17 @@ const OrderPrice = ({ orderPrice }) => {
   const [product] = useProduct();
   const [cart] = useCart(product);
   const navigate = useNavigate();
+
   let totalPrice = 0;
-  let shipping = 0;
   let quantity = 0;
   for (const element of orderPrice) {
+    console.log(element);
     quantity = quantity + element.quantity;
-    totalPrice = totalPrice + element.price * element.quantity;
-    shipping = shipping + element.shipping;
+    totalPrice =
+      totalPrice + parseFloat(element.price) * parseInt(element.quantity);
   }
   let tax = parseFloat((totalPrice * 0.1).toFixed(0));
-  let grandTotal = (totalPrice + shipping + tax).toFixed(0);
+  let grandTotal = (totalPrice + tax).toFixed(0);
 
   const handleShipping = () => {
     if (cart.length !== 0) {
@@ -31,7 +32,7 @@ const OrderPrice = ({ orderPrice }) => {
       <div className="order-summery-card">
         <p>Items Order: {quantity}</p>
         <p>Item price: {totalPrice}</p>
-        <p>Shipping cost: {shipping}</p>
+
         <p>Tax: {tax}</p>
         <h6>Total Price: {grandTotal}</h6>
         <button

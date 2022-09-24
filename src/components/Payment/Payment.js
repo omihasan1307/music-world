@@ -8,18 +8,20 @@ import { clearTheCart } from "../../utilities/fakedb";
 const Payment = () => {
   const [product] = useProduct();
   const [cart] = useCart(product);
+
   const navigate = useNavigate();
 
   let totalPrice = 0;
-  let shipping = 0;
   let quantity = 0;
   for (const element of cart) {
+    console.log(element);
+
     quantity = quantity + element.quantity;
-    totalPrice = totalPrice + element.price * element.quantity;
-    shipping = shipping + element.shipping;
+    totalPrice =
+      totalPrice + parseFloat(element.price) * parseInt(element.quantity);
   }
   let tax = parseFloat((totalPrice * 0.1).toFixed(0));
-  let grandTotal = (totalPrice + shipping + tax).toFixed(0);
+  let grandTotal = (totalPrice + tax).toFixed(0);
 
   const onToken = (token) => {
     clearTheCart();

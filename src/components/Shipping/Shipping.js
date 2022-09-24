@@ -1,10 +1,17 @@
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
-import auth from "../../firebase.init";
+// import auth from "../../firebase.init";
+import { auth, db } from "../../firebase.init";
+import useCart from "../../Hooks/useCart";
+import useProduct from "../../Hooks/useProduct";
 
 const Shipping = () => {
   const [user] = useAuthState(auth);
+
+  const [product] = useProduct();
+  const [cart] = useCart(product);
 
   const [name, setName] = useState();
   const [email, setEmail] = useState();
@@ -16,6 +23,9 @@ const Shipping = () => {
   const handleNameBlur = (event) => {
     setName(event.target.value);
   };
+  const handleEmailBlur = (event) => {
+    setEmail(event.target.value);
+  };
 
   const handleAddressBlur = (event) => {
     setAddress(event.target.value);
@@ -24,10 +34,17 @@ const Shipping = () => {
     setPhone(event.target.value);
   };
 
-  const handleShipment = (event) => {
+  const handleShipment = async (event) => {
     event.preventDefault();
-    const shippingInfo = { name, email, address, phone };
-    console.log(shippingInfo);
+    await setDoc(doc(db, "order", user.uid), {
+      id: user.uid,
+      name: name,
+      email: email,
+      address: address,
+      phone: phone,
+      cart: cart,
+    });
+
     navigate("/payment");
   };
   return (
@@ -54,8 +71,7 @@ const Shipping = () => {
               </label>
               <br />
               <input
-                value={user?.email}
-                readOnly
+                onBlur={handleEmailBlur}
                 type="email"
                 placeholder="Enter your email"
                 className="input-field rounded-pill px-3 py-2"

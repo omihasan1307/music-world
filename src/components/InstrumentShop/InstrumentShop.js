@@ -12,6 +12,8 @@ const InstrumentShop = () => {
     (element) => element.category === "Instrument"
   );
 
+  console.log(instrument);
+
   const handleAddToCart = (item) => {
     const newCart = [...cart, item];
     setCart(newCart);

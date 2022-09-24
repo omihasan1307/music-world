@@ -19,13 +19,13 @@ function App() {
       <Headers />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
         <Route path="/instruments" element={<InstrumentShop />} />
         <Route path="/courses" element={<CourseShop />} />
         <Route path="/ordersummery" element={<OrderSummery />} />
         <Route path="/productDetails/:details" element={<ProductDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
+        <Route path="/contact" element={<Contact />} />
         <Route
           path="/shipping"
           element={

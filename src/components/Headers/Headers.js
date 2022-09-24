@@ -5,8 +5,9 @@ import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import useProduct from "../../Hooks/useProduct";
 import useCart from "../../Hooks/useCart";
 import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "../../firebase.init";
+// import auth from "../../firebase.init";
 import { signOut } from "firebase/auth";
+import { auth } from "../../firebase.init";
 
 const Headers = () => {
   const [product] = useProduct();
@@ -18,6 +19,8 @@ const Headers = () => {
   }
 
   const [user] = useAuthState(auth);
+
+  console.log(user);
 
   const handleSignOut = () => {
     signOut(auth);
@@ -73,11 +76,10 @@ const Headers = () => {
                 </sup>
               </span>
             </Link>
-
             {user ? (
               <Link onClick={handleSignOut} to="/login" className="nav-link">
                 <button className="rounded-pill px-3 py-1 common-btn ms-3">
-                  Log Out
+                  {user.email.split("@gmail.com")}
                 </button>
               </Link>
             ) : (
