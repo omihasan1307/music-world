@@ -21,7 +21,14 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/instruments" element={<InstrumentShop />} />
         <Route path="/courses" element={<CourseShop />} />
-        <Route path="/ordersummery" element={<OrderSummery />} />
+        <Route
+          path="/ordersummery"
+          element={
+            <RequireAuth>
+              <OrderSummery />
+            </RequireAuth>
+          }
+        />
         <Route path="/productDetails/:details" element={<ProductDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />

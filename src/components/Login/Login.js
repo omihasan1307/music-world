@@ -21,11 +21,22 @@ const Login = () => {
   const from = location.state?.from?.pathname || "/";
 
   const handleEmailBlur = (event) => {
-    setEmail(event.target.value);
+    const validEmail = /.+@(gmail|yahoo|outlook|mail|icloud|aol)\.com$/;
+    if (event.target.value.match(validEmail)) {
+      setEmail(event.target.value);
+    } else {
+      alert("Email is not valid");
+    }
   };
 
   const handlePasswordBlur = (event) => {
-    setPassword(event.target.value);
+    const passwordValid =
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+    if (event.target.value.match(passwordValid)) {
+      setPassword(event.target.value);
+    } else {
+      alert("Password is not valid");
+    }
   };
 
   if (user) {

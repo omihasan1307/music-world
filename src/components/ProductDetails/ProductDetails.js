@@ -42,8 +42,8 @@ const ProductDetails = () => {
     <div className="container">
       {loading === false ? (
         <div className="d-flex justify-content-center align-items-center h-100">
-          <div class="spinner-grow" role="status">
-            <span class="visually-hidden">Loading...</span>
+          <div className="spinner-grow" role="status">
+            <span className="visually-hidden">Loading...</span>
           </div>
         </div>
       ) : (

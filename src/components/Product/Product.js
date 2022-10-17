@@ -2,10 +2,13 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../../firebase.init";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const Product = ({ allInstrument, handleAddToCart }) => {
-  const { productName, img, shipping, price, id, rating } = allInstrument;
-
+  const { productName, img, price, id } = allInstrument;
+  const [user] = useAuthState(auth);
+  console.log(user);
   const navigate = useNavigate();
   const handleDetail = () => {
     navigate(`/productDetails/${id}`);
@@ -18,15 +21,23 @@ const Product = ({ allInstrument, handleAddToCart }) => {
           <img src={img} alt="" />
         </div>
         <div className="product-details px-3">
-          <h3 onClick={handleDetail} className="link-decoration">
-            {productName}
+          <h3
+            onClick={handleDetail}
+            className="link-decoration"
+            title={productName}
+          >
+            {productName.length > 25
+              ? productName.slice(0, 25) + "..."
+              : productName}
           </h3>
           <p>BDT {price}</p>
-          <p>Rating: {rating}</p>
-          <p>Shipping: {shipping}</p>
         </div>
         <button
-          onClick={() => handleAddToCart(allInstrument)}
+          onClick={
+            user === null
+              ? () => navigate("/login")
+              : () => handleAddToCart(allInstrument)
+          }
           className="position-absolute bottom-0 w-100 rounded-pill common-btn py-1"
         >
           <FontAwesomeIcon icon={faShoppingCart} /> Add to Cart

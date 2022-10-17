@@ -5,19 +5,23 @@ import pic1 from "../../images/1.jpg";
 import pic2 from "../../images/2.jpeg";
 import Footer from "../Footer/Footer";
 import Product from "../Product/Product";
-import { useState } from "react";
-import { addToDb } from "../../utilities/fakedb";
+import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
+import { auth, db } from "../../firebase.init";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const Home = () => {
   const [instruments] = useProduct();
-
-  const [cart, setCart] = useState([]);
-
-  const handleAddToCart = (item) => {
-    const newCart = [...cart, item];
-    setCart(newCart);
-    addToDb(item.id);
-    window.location.reload();
+  const [user] = useAuthState(auth);
+  const handleAddToCart = async (item) => {
+    const docRef = await addDoc(
+      collection(db, `selectCart/${user.uid}/addtoCart`),
+      {
+        product: item,
+      }
+    );
+    await updateDoc(doc(db, `selectCart/${user.uid}/addtoCart`, docRef.id), {
+      pId: docRef.id,
+    });
   };
 
   return (

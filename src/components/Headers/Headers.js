@@ -5,22 +5,13 @@ import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import useProduct from "../../Hooks/useProduct";
 import useCart from "../../Hooks/useCart";
 import { useAuthState } from "react-firebase-hooks/auth";
-// import auth from "../../firebase.init";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase.init";
 
 const Headers = () => {
   const [product] = useProduct();
   const [cart] = useCart(product);
-
-  let quantity = 0;
-  for (const element of cart) {
-    quantity = quantity + element.quantity;
-  }
-
   const [user] = useAuthState(auth);
-
-  console.log(user);
 
   const handleSignOut = () => {
     signOut(auth);
@@ -72,7 +63,7 @@ const Headers = () => {
               <FontAwesomeIcon icon={faShoppingCart} className="title" />
               <span>
                 <sup className="fw-bold fs-6">
-                  {quantity === 0 ? 0 : quantity}
+                  {cart.length === 0 ? 0 : cart.length}
                 </sup>
               </span>
             </Link>

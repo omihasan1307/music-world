@@ -29,21 +29,33 @@ const Registration = () => {
   }
 
   const handleNameBlur = (event) => {
-    setName(event.target.value);
+    const usernameRegex = /^[a-zA-Z]+ [a-zA-Z]+$/;
+    if (event.target.value.match(usernameRegex)) {
+      setName(event.target.value);
+    } else {
+      alert("Name is not valid");
+    }
   };
   const handleEmailBlur = (event) => {
-    setEmail(event.target.value);
+    const validEmail = /.+@(gmail|yahoo|outlook|mail|icloud|aol)\.com$/;
+    if (event.target.value.match(validEmail)) {
+      setEmail(event.target.value);
+    } else {
+      alert("Email is not valid");
+    }
   };
   const handlePasswordBlur = (event) => {
-    setPassword(event.target.value);
+    const passwordValid =
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+    if (event.target.value.match(passwordValid)) {
+      setPassword(event.target.value);
+    } else {
+      alert("Password is not valid");
+    }
   };
 
   const handleCreateUser = async (event) => {
     event.preventDefault();
-    if (password.length < 6) {
-      setError("Password must be 6 characters or longer");
-      return;
-    }
     try {
       const docRef = await addDoc(collection(db, "users"), {
         name: name,

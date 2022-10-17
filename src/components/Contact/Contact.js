@@ -12,10 +12,20 @@ const Contact = () => {
   const [user] = useAuthState(auth);
 
   const handleNameBlur = (event) => {
-    setName(event.target.value);
+    const usernameRegex = /^[a-zA-Z]+ [a-zA-Z]+$/;
+    if (event.target.value.match(usernameRegex)) {
+      setName(event.target.value);
+    } else {
+      alert("Name is not valid");
+    }
   };
   const handleEmailBlur = (event) => {
-    setEmail(event.target.value);
+    const validEmail = /.+@(gmail|yahoo|outlook|mail|icloud|aol)\.com$/;
+    if (event.target.value.match(validEmail)) {
+      setEmail(event.target.value);
+    } else {
+      alert("Email is not valid");
+    }
   };
   const handleMessageBlur = (event) => {
     setMessage(event.target.value);

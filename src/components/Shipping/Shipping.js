@@ -2,17 +2,14 @@ import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
-// import auth from "../../firebase.init";
 import { auth, db } from "../../firebase.init";
 import useCart from "../../Hooks/useCart";
 import useProduct from "../../Hooks/useProduct";
 
 const Shipping = () => {
   const [user] = useAuthState(auth);
-
   const [product] = useProduct();
   const [cart] = useCart(product);
-
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [address, setAddress] = useState();
@@ -21,17 +18,33 @@ const Shipping = () => {
   const navigate = useNavigate();
 
   const handleNameBlur = (event) => {
-    setName(event.target.value);
+    const usernameRegex = /^[a-zA-Z]+ [a-zA-Z]+$/;
+    if (event.target.value.match(usernameRegex)) {
+      setName(event.target.value);
+    } else {
+      alert("Name is not valid");
+    }
   };
+
   const handleEmailBlur = (event) => {
-    setEmail(event.target.value);
+    const validEmail = /.+@(gmail|yahoo|outlook|mail|icloud|aol)\.com$/;
+    if (event.target.value.match(validEmail)) {
+      setEmail(event.target.value);
+    } else {
+      alert("Email is not valid");
+    }
   };
 
   const handleAddressBlur = (event) => {
     setAddress(event.target.value);
   };
   const handlePhoneBlur = (event) => {
-    setPhone(event.target.value);
+    const phoneno = /^(?:\+?88)?01[15-9]\d{8}$/;
+    if (event.target.value.match(phoneno)) {
+      setPhone(event.target.value);
+    } else {
+      alert("Number is not valid");
+    }
   };
 
   const handleShipment = async (event) => {
@@ -94,9 +107,10 @@ const Shipping = () => {
                 Phone
               </label>
               <br />
+
               <input
                 onBlur={handlePhoneBlur}
-                type="text"
+                type="number"
                 placeholder="Enter your phone number"
                 className="input-field rounded-pill px-3 py-2"
                 required
