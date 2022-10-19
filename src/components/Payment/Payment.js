@@ -1,39 +1,34 @@
+import { deleteDoc, doc } from "firebase/firestore";
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import StripeCheckout from "react-stripe-checkout";
+import { auth, db } from "../../firebase.init";
 import useCart from "../../Hooks/useCart";
-import useProduct from "../../Hooks/useProduct";
-import { clearTheCart } from "../../utilities/fakedb";
 
 const Payment = () => {
-  const [product] = useProduct();
-  const [cart] = useCart(product);
+  const [cart] = useCart();
+  const [user] = useAuthState(auth);
 
   const navigate = useNavigate();
 
   let totalPrice = 0;
-  let quantity = 0;
   for (const element of cart) {
-    console.log(element);
-
-    quantity = quantity + element.quantity;
-    totalPrice =
-      totalPrice + parseFloat(element.price) * parseInt(element.quantity);
+    totalPrice = totalPrice + parseFloat(element.product.price);
   }
   let tax = parseFloat((totalPrice * 0.1).toFixed(0));
   let grandTotal = (totalPrice + tax).toFixed(0);
 
-  const onToken = (token) => {
-    clearTheCart();
+  const onToken = async (token) => {
+    await deleteDoc(doc(db, "selectCart", `${user.uid}`));
     navigate("/");
-    window.location.reload();
   };
 
   return (
     <div className="mt-5">
       <div>
         {cart.map((element) => {
-          const { productName, img, price } = element;
+          const { productName, img, price } = element.product;
           return (
             <div className="d-flex justify-content-center ">
               <div className="payment-card m-2">
@@ -56,8 +51,6 @@ const Payment = () => {
           <StripeCheckout
             token={onToken}
             name="music world"
-            // currency="BDT"
-            // amount={grandTotal}
             stripeKey="pk_test_51LWvsNLMcriZxEttA38fplrKRNWlpUER5KuwivRiWd5ukwv25KQZIMZ1jJ4ZytNmSDqYTVhmS1PUzx2R3eOGAtFF00uEKhILxq"
           />
         </div>

@@ -9,6 +9,7 @@ import OrderPrice from "../OrderPrice/OrderPrice";
 const OrderSummery = () => {
   const [cart] = useCart();
   const [user] = useAuthState(auth);
+
   const handleRemoveCart = async (productId) => {
     await deleteDoc(doc(db, `selectCart/${user.uid}/addtoCart`, productId));
   };

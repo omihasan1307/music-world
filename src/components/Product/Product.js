@@ -8,7 +8,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 const Product = ({ allInstrument, handleAddToCart }) => {
   const { productName, img, price, id } = allInstrument;
   const [user] = useAuthState(auth);
-  console.log(user);
+
   const navigate = useNavigate();
   const handleDetail = () => {
     navigate(`/productDetails/${id}`);
