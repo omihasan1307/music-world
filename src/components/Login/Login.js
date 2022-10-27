@@ -25,7 +25,7 @@ const Login = () => {
     if (event.target.value.match(validEmail)) {
       setEmail(event.target.value);
     } else {
-      alert("Email is not valid");
+      // alert("Email is not valid");
     }
   };
 
@@ -35,7 +35,7 @@ const Login = () => {
     if (event.target.value.match(passwordValid)) {
       setPassword(event.target.value);
     } else {
-      alert("Password is not valid");
+      // alert("Password is not valid");
     }
   };
 

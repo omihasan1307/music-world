@@ -4,7 +4,6 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const OrderList = ({ allOrderList, handleRemoveCart }) => {
   const { pId } = allOrderList;
-
   const { productName, img, price, quantity } = allOrderList.product;
   return (
     <div>

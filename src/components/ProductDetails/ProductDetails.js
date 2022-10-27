@@ -1,3 +1,5 @@
+import { faStar, faStarHalfStroke } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { collection, onSnapshot } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -25,18 +27,7 @@ const ProductDetails = () => {
 
   const pdDetail = loading === true && product.find((e) => e.id === details);
 
-  const {
-    productName,
-    img,
-    about,
-    price,
-    category,
-    rating,
-    shipping,
-    quantity,
-    id,
-    Durations,
-  } = pdDetail;
+  const { productName, img, productAbout, price, category } = pdDetail;
 
   return (
     <div className="container">
@@ -57,13 +48,19 @@ const ProductDetails = () => {
         </div>
         <div className="col-12 col-md-6">
           <div className="instruDetails ">
-            <h1>{productName}</h1>
-            <h5>{about}</h5>
+            <h1 className="title-text">{productName}</h1>
             <h5>BDT {price}</h5>
-            <h5>Rating: {rating}</h5>
-            <h5>Quantity: {quantity}</h5>
-            <h5>Shipping: {shipping}</h5>
-            <h5>{Durations} </h5>
+            <i>
+              <h6>{category} Category</h6>
+            </i>
+            <p>{productAbout}</p>
+          </div>
+          <div className="text-warning">
+            <FontAwesomeIcon icon={faStar} />
+            <FontAwesomeIcon icon={faStar} />
+            <FontAwesomeIcon icon={faStar} />
+            <FontAwesomeIcon icon={faStarHalfStroke} />
+            <FontAwesomeIcon icon={faStarHalfStroke} />
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@ import { auth } from "../../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 const Product = ({ allInstrument, handleAddToCart }) => {
-  const { productName, img, price, id } = allInstrument;
+  const { productName, img, price, productAbout, id } = allInstrument;
   const [user] = useAuthState(auth);
 
   const navigate = useNavigate();
@@ -31,6 +31,13 @@ const Product = ({ allInstrument, handleAddToCart }) => {
               : productName}
           </h3>
           <p>BDT {price}</p>
+          <p>
+            <small>
+              {productAbout.length > 40
+                ? productAbout.slice(0, 40) + "..."
+                : productAbout}
+            </small>
+          </p>
         </div>
         <button
           onClick={

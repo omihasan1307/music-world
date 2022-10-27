@@ -4,10 +4,39 @@ import Footer from "../Footer/Footer";
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useState } from "react";
 
 const InstrumentShop = () => {
   const [instruments] = useProduct();
   const [user] = useAuthState(auth);
+  const [searchText, setSearchText] = useState("");
+  const [matchItem, setMatchItem] = useState([]);
+
+  // console.log(matchItem);
+
+  const handleSearch = (e) => {
+    setSearchText(e.target.value);
+  };
+
+  const handleSearchBtn = () => {
+    const pdN = instruments.map((pdName) => pdName.productName);
+    for (const element of pdN) {
+      console.log(element);
+
+      const s = instruments.filter((e) => e.productName == element);
+      // console.log(s);
+    }
+
+    // const allProduct = [];
+    // instruments.map((item) => allProduct.push(item.productName));
+    // for (const e of allProduct) {
+    //   if (e.toLowerCase().includes(searchText.toLowerCase())) {
+    //     // console.log(e);
+    //     const s = instruments.filter((item) => item.productName === e);
+    //     setMatchItem(s);
+    //   }
+    // }
+  };
 
   const instrument = instruments.filter(
     (element) => element.category === "Instrument"
@@ -27,6 +56,15 @@ const InstrumentShop = () => {
 
   return (
     <div>
+      <div className="search-field text-center">
+        <input
+          onChange={handleSearch}
+          type="search"
+          name="search"
+          placeholder="Search your product"
+        />
+        <button onClick={handleSearchBtn}>Search</button>
+      </div>
       <div className="container mt-5">
         {instruments.length === 0 ? (
           <div className="d-flex justify-content-center">

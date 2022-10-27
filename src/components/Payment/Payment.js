@@ -1,4 +1,4 @@
-import { deleteDoc, doc } from "firebase/firestore";
+import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,6 @@ import useCart from "../../Hooks/useCart";
 const Payment = () => {
   const [cart] = useCart();
   const [user] = useAuthState(auth);
-
   const navigate = useNavigate();
 
   let totalPrice = 0;
@@ -20,8 +19,17 @@ const Payment = () => {
   let grandTotal = (totalPrice + tax).toFixed(0);
 
   const onToken = async (token) => {
-    await deleteDoc(doc(db, "selectCart", `${user.uid}`));
+    await setDoc(doc(db, "paymentInfo", user.uid), {
+      uid: user.uid,
+      cid: token.id,
+      email: token.email,
+      card: token.card.brand,
+      paid: grandTotal,
+    });
     navigate("/");
+    for (const carts of cart) {
+      await deleteDoc(doc(db, `selectCart/${user.uid}/addtoCart`, carts.pId));
+    }
   };
 
   return (

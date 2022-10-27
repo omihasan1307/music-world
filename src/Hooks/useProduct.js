@@ -5,7 +5,6 @@ import { db } from "../firebase.init";
 
 const useProduct = () => {
   const [product, setProduct] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     onSnapshot(
@@ -13,7 +12,6 @@ const useProduct = () => {
       (snapshot) => {
         const getValue = snapshot.docs.map((e) => e.data());
         setProduct(getValue);
-        setLoading(true);
       },
       (error) => {
         console.log(error);

@@ -72,6 +72,18 @@ const Registration = () => {
   };
 
   const [signInWithGoogle, done] = useSignInWithGoogle(auth);
+
+  // const handleGoogle = async () => {
+  //   const docRef = await addDoc(collection(db, "users"), {
+  //     name: done.user.displayName,
+  //     email: done.user.email,
+  //     create: new Date(),
+  //   });
+  //   await updateDoc(doc(db, "users", docRef.id), {
+  //     id: docRef.id,
+  //   });
+  // };
+
   if (done) {
     navigate(from, { replace: true });
   }

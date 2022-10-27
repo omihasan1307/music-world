@@ -68,7 +68,7 @@ body {
 }
 
 .product-details p {
-  line-height: 9px;
+  line-height: 8px;
 }
 
 .product-details h3 {
@@ -173,6 +173,28 @@ li a {
   height: 35px;
   overflow: hidden;
 }
+.search-field {
+  margin-top: 10px;
+}
+.search-field input {
+  background: rgba(65, 64, 64, 0.267);
+  color: white;
+  outline-style: none;
+  width: 40%;
+  border: none;
+  padding: 8px 8px;
+}
+.search-field button {
+  background: rgba(65, 64, 64, 0.267);
+  color: rgba(255, 255, 255, 0.432);
+  border: none;
+  padding: 8px 8px;
+}
+
+.search-field button:hover {
+  background-color: #ec008c;
+  color: white;
+}
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -187,5 +209,8 @@ input[type="number"] {
 @media only screen and (max-width: 688px) {
   .order-summery-card {
     text-align: center;
+  }
+  .search-field input {
+    width: 80%;
   }
 }

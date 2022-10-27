@@ -1,7 +1,7 @@
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { auth, db } from "../../firebase.init";
 import useCart from "../../Hooks/useCart";
 import useProduct from "../../Hooks/useProduct";
@@ -57,9 +57,9 @@ const Shipping = () => {
       phone: phone,
       cart: cart,
     });
-
     navigate("/payment");
   };
+
   return (
     <div>
       <div className="container">

@@ -67,6 +67,7 @@ const Headers = () => {
                 </sup>
               </span>
             </Link>
+
             {user ? (
               <Link onClick={handleSignOut} to="/login" className="nav-link">
                 <button className="rounded-pill px-3 py-1 common-btn ms-3">
