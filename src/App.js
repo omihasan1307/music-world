@@ -12,6 +12,7 @@ import ProductDetails from "./components/ProductDetails/ProductDetails";
 import Registration from "./components/Registration/Registration";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
 import Shipping from "./components/Shipping/Shipping";
+import "animate.css";
 
 function App() {
   return (

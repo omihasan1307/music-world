@@ -54,7 +54,6 @@ const Contact = () => {
     });
   };
   getData();
-
   return (
     <div>
       <div>

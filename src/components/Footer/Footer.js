@@ -6,11 +6,11 @@ import { BsFacebook } from "react-icons/bs";
 const Footer = () => {
   return (
     <div className="container mt-5">
-      <div className="row">
+      <div className="row footer">
         <div className="col-12 col-sm-6 col-md-4 d-flex justify-content-around align-items-center">
           <div>
             <h4>Explore</h4>
-            <ul>
+            <ul className="footer-link">
               <li>
                 <a href="../courses/">Courses</a>
               </li>
@@ -26,7 +26,7 @@ const Footer = () => {
         <div className="col-12 col-sm-6 col-md-4 d-flex justify-content-around align-items-center">
           <div>
             <h4>About</h4>
-            <ul>
+            <ul className="footer-link">
               <li>
                 <a href="/#">Privacy</a>
               </li>
@@ -42,14 +42,14 @@ const Footer = () => {
         <div className="col-12 col-sm-6 col-md-4 d-flex justify-content-around align-items-center">
           <div>
             <h4>Follow Us</h4>
-            <ul>
+            <ul className="footer-link">
               <li>
-                <a href="https://www.facebook.com/omihasansakin">
+                <a href="https://www.facebook.com/">
                   <BsFacebook /> Facebook
                 </a>
               </li>
               <li>
-                <a href="https://twitter.com/omi7641">
+                <a href="https://twitter.com/">
                   <AiFillTwitterCircle /> Twitter
                 </a>
               </li>

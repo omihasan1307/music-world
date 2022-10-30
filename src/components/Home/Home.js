@@ -29,7 +29,7 @@ const Home = () => {
       <section className="my-5">
         <div className="row">
           <div className="col-12 col-md-6 d-flex justify-content-center align-items-center">
-            <div>
+            <div className="animate__animated animate__fadeInLeft">
               <h1>
                 Be a good musician and <br /> Reach your dream
               </h1>
@@ -46,8 +46,8 @@ const Home = () => {
               </Link>
             </div>
           </div>
-          <div className="col-12 col-md-6 d-flex justify-content-center align-items-center">
-            <div>
+          <div className="col-12 col-md-6 d-flex justify-content-center align-items-center ">
+            <div className="animate__animated animate__fadeInRight">
               <img src={home} alt="" />
             </div>
           </div>
@@ -57,19 +57,19 @@ const Home = () => {
       <section>
         <div className="row">
           <div className="col-12 col-md-4 d-flex justify-content-center align-items-center">
-            <div className="text-center">
+            <div className="text-center animate__animated animate__fadeInLeft">
               <h2>50+</h2>
               <h3>Courses</h3>
             </div>
           </div>
           <div className="col-12 col-md-4 d-flex justify-content-center align-items-center my-5">
-            <div className="text-center">
+            <div className="text-center animate__animated animate__fadeInDown">
               <h2>20+</h2>
               <h3>Teachers</h3>
             </div>
           </div>
           <div className="col-12 col-md-4 d-flex justify-content-center align-items-center">
-            <div className="text-center">
+            <div className="text-center animate__animated animate__fadeInRight">
               <h2>2000+</h2>
               <h3>Students</h3>
             </div>
@@ -78,8 +78,8 @@ const Home = () => {
       </section>
 
       <section>
-        <h1 className="text-center my-3">Our Instrument</h1>
-        <div className="row">
+        <h1 className="text-center my-5">Our Instrument</h1>
+        <div className="row ">
           {instruments.slice(0, 3).map((element) => (
             <Product
               key={element.id}
@@ -87,15 +87,15 @@ const Home = () => {
               handleAddToCart={handleAddToCart}
             />
           ))}
-          <div className="d-flex justify-content-center">
-            <Link to="/instruments" className="see-more mt-4">
+          <div className="d-flex justify-content-center ">
+            <Link to="/instruments" className="see-more mt-5">
               See More
             </Link>
           </div>
         </div>
       </section>
 
-      <section>
+      <section className="mt-4">
         <h1 className="text-center my-5">Review</h1>
         <div className="row">
           <div className="col-12 col-md-6 d-flex justify-content-center">
