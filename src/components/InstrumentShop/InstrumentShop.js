@@ -26,16 +26,6 @@ const InstrumentShop = () => {
       const s = instruments.filter((e) => e.productName == element);
       // console.log(s);
     }
-
-    // const allProduct = [];
-    // instruments.map((item) => allProduct.push(item.productName));
-    // for (const e of allProduct) {
-    //   if (e.toLowerCase().includes(searchText.toLowerCase())) {
-    //     // console.log(e);
-    //     const s = instruments.filter((item) => item.productName === e);
-    //     setMatchItem(s);
-    //   }
-    // }
   };
 
   const instrument = instruments.filter(

@@ -8,14 +8,19 @@ import {
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import { auth, db } from "../../firebase.init";
-import { addDoc, collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  onSnapshot,
+  updateDoc,
+} from "firebase/firestore";
 
 const Registration = () => {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [hasUser, setHasUser] = useState([]);
-
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -32,16 +37,12 @@ const Registration = () => {
     const usernameRegex = /^[a-zA-Z]+ [a-zA-Z]+$/;
     if (event.target.value.match(usernameRegex)) {
       setName(event.target.value);
-    } else {
-      alert("Name is not valid");
     }
   };
   const handleEmailBlur = (event) => {
     const validEmail = /.+@(gmail|yahoo|outlook|mail|icloud|aol)\.com$/;
     if (event.target.value.match(validEmail)) {
       setEmail(event.target.value);
-    } else {
-      alert("Email is not valid");
     }
   };
   const handlePasswordBlur = (event) => {
@@ -49,8 +50,6 @@ const Registration = () => {
       /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
     if (event.target.value.match(passwordValid)) {
       setPassword(event.target.value);
-    } else {
-      alert("Password is not valid");
     }
   };
 
@@ -61,22 +60,19 @@ const Registration = () => {
 
   if (user) {
     try {
-      const docRef = addDoc(collection(db, "users"), {
+      addDoc(collection(db, "users"), {
         name: name,
         email: email,
         create: new Date(),
       });
-      updateDoc(doc(db, "users", docRef.id), {
-        id: docRef.id,
-      });
-
-    } catch (e) { }
+    } catch (e) {}
   }
   const [signInWithGoogle, done] = useSignInWithGoogle(auth);
 
   useEffect(() => {
     onSnapshot(collection(db, "users"), (snapshot) => {
       const getValue = snapshot.docs.map((e) => e.data());
+
       setHasUser(getValue.map((e) => e.email));
     });
   }, []);
@@ -84,19 +80,18 @@ const Registration = () => {
   useEffect(() => {
     if (done) {
       for (const elements of hasUser) {
-        console.log(elements);
-        if (elements !== done.user.email) {
+        if (elements === done.user.email) {
           addDoc(collection(db, "users"), {
             name: done.user.displayName,
             email: done.user.email,
             create: new Date(),
           });
+
           break;
         }
       }
     }
   }, [done, hasUser]);
-
 
   if (done) {
     navigate(from, { replace: true });
@@ -152,9 +147,13 @@ const Registration = () => {
                 required
               />
             </form>
-            {
-              err ? <p className="text-center" style={{ color: "red" }}>{err.message}</p> : <p></p>
-            }
+            {err ? (
+              <p className="text-center" style={{ color: "red" }}>
+                {err.message}
+              </p>
+            ) : (
+              <p></p>
+            )}
 
             {loading && <p className="text-center">Loading...</p>}
             <div>

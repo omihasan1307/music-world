@@ -6,7 +6,7 @@ import { auth } from "../../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 const Product = ({ allInstrument, handleAddToCart }) => {
-  const { productName, img, price, productAbout, id, video, status } = allInstrument;
+  const { productName, img, price, productAbout, id } = allInstrument;
   const [user] = useAuthState(auth);
 
   const navigate = useNavigate();
@@ -17,9 +17,8 @@ const Product = ({ allInstrument, handleAddToCart }) => {
   return (
     <div className=" col-12 col-md-4 d-flex justify-content-around align-items-center">
       <div className="product-card position-relative ">
-
         <div className="product-image ">
-          {
+          {/* {
             status ? <iframe
               width="560"
               height="315"
@@ -29,8 +28,8 @@ const Product = ({ allInstrument, handleAddToCart }) => {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
             ></iframe> : <img src={img} alt="" />
-          }
-
+          } */}
+          <img src={img} alt="" />
         </div>
         <div className="product-details px-3">
           <h3

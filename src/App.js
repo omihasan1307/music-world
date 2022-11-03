@@ -13,6 +13,7 @@ import Registration from "./components/Registration/Registration";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
 import Shipping from "./components/Shipping/Shipping";
 import "animate.css";
+import PaidCourse from "./components/PaidCourse/PaidCourse";
 
 function App() {
   return (
@@ -34,6 +35,15 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/contact" element={<Contact />} />
+        <Route
+          path="/paidcourse"
+          element={
+            <RequireAuth>
+              <PaidCourse />
+            </RequireAuth>
+          }
+        />
+
         <Route
           path="/shipping"
           element={

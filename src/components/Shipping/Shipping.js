@@ -1,4 +1,4 @@
-import { doc, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc, setDoc, updateDoc } from "firebase/firestore";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
@@ -15,14 +15,14 @@ const Shipping = () => {
   const [address, setAddress] = useState();
   const [phone, setPhone] = useState();
 
+  console.log(cart);
+
   const navigate = useNavigate();
 
   const handleNameBlur = (event) => {
     const usernameRegex = /^[a-zA-Z]+ [a-zA-Z]+$/;
     if (event.target.value.match(usernameRegex)) {
       setName(event.target.value);
-    } else {
-      alert("Name is not valid");
     }
   };
 
@@ -30,8 +30,6 @@ const Shipping = () => {
     const validEmail = /.+@(gmail|yahoo|outlook|mail|icloud|aol)\.com$/;
     if (event.target.value.match(validEmail)) {
       setEmail(event.target.value);
-    } else {
-      alert("Email is not valid");
     }
   };
 
@@ -42,8 +40,6 @@ const Shipping = () => {
     const phoneno = /^(?:\+?88)?01[15-9]\d{8}$/;
     if (event.target.value.match(phoneno)) {
       setPhone(event.target.value);
-    } else {
-      alert("Number is not valid");
     }
   };
 
@@ -56,6 +52,15 @@ const Shipping = () => {
       address: address,
       phone: phone,
       cart: cart,
+    });
+    const docRef = await addDoc(
+      collection(db, `purchaseCourse/${user.uid}/course`),
+      {
+        course: cart,
+      }
+    );
+    await updateDoc(doc(db, `purchaseCourse/${user.uid}/course`, docRef.id), {
+      cId: docRef.id,
     });
     navigate("/payment");
   };
