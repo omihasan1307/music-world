@@ -57,6 +57,11 @@ const Headers = () => {
                   Contact
                 </Link>
               </li>
+              <li className="nav-item link-decoration">
+                <Link className="nav-link" to="/paidcourse">
+                  Videos
+                </Link>
+              </li>
             </ul>
 
             <Link to="ordersummery" className="nav-link">

@@ -118,6 +118,10 @@ body {
   text-decoration: none;
 }
 
+.not-available {
+  min-height: 90vh;
+}
+
 .register-link:hover {
   cursor: pointer;
   text-decoration: underline;
