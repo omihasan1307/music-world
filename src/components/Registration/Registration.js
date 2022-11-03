@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -8,20 +8,20 @@ import {
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import { auth, db } from "../../firebase.init";
-import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
 
 const Registration = () => {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [error, setError] = useState();
+  const [hasUser, setHasUser] = useState([]);
 
   const navigate = useNavigate();
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/";
 
-  const [createUserWithEmailAndPassword, user, loading] =
+  const [createUserWithEmailAndPassword, user, loading, err] =
     useCreateUserWithEmailAndPassword(auth);
 
   if (user) {
@@ -56,33 +56,47 @@ const Registration = () => {
 
   const handleCreateUser = async (event) => {
     event.preventDefault();
+    createUserWithEmailAndPassword(email, password);
+  };
+
+  if (user) {
     try {
-      const docRef = await addDoc(collection(db, "users"), {
+      const docRef = addDoc(collection(db, "users"), {
         name: name,
         email: email,
         create: new Date(),
       });
-      await updateDoc(doc(db, "users", docRef.id), {
+      updateDoc(doc(db, "users", docRef.id), {
         id: docRef.id,
       });
-      createUserWithEmailAndPassword(email, password);
-    } catch (e) {
-      alert(e);
-    }
-  };
 
+    } catch (e) { }
+  }
   const [signInWithGoogle, done] = useSignInWithGoogle(auth);
 
-  // const handleGoogle = async () => {
-  //   const docRef = await addDoc(collection(db, "users"), {
-  //     name: done.user.displayName,
-  //     email: done.user.email,
-  //     create: new Date(),
-  //   });
-  //   await updateDoc(doc(db, "users", docRef.id), {
-  //     id: docRef.id,
-  //   });
-  // };
+  useEffect(() => {
+    onSnapshot(collection(db, "users"), (snapshot) => {
+      const getValue = snapshot.docs.map((e) => e.data());
+      setHasUser(getValue.map((e) => e.email));
+    });
+  }, []);
+
+  useEffect(() => {
+    if (done) {
+      for (const elements of hasUser) {
+        console.log(elements);
+        if (elements !== done.user.email) {
+          addDoc(collection(db, "users"), {
+            name: done.user.displayName,
+            email: done.user.email,
+            create: new Date(),
+          });
+          break;
+        }
+      }
+    }
+  }, [done, hasUser]);
+
 
   if (done) {
     navigate(from, { replace: true });
@@ -138,11 +152,15 @@ const Registration = () => {
                 required
               />
             </form>
-            <p style={{ color: "red" }}>{error}</p>
+            {
+              err ? <p className="text-center" style={{ color: "red" }}>{err.message}</p> : <p></p>
+            }
+
             {loading && <p className="text-center">Loading...</p>}
             <div>
               <button
                 onClick={() => signInWithGoogle()}
+                // onClick={() => creatSignInGoogle()}
                 className="w-100 p-2 rounded-pill mt-2"
               >
                 <FcGoogle className="fs-4 me-2" /> Continue with Google
