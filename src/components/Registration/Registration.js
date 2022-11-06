@@ -13,6 +13,7 @@ import {
   collection,
   doc,
   onSnapshot,
+  setDoc,
   updateDoc,
 } from "firebase/firestore";
 
@@ -67,8 +68,8 @@ const Registration = () => {
       });
     } catch (e) {}
   }
-  const [signInWithGoogle, done] = useSignInWithGoogle(auth);
 
+  const [signInWithGoogle, done] = useSignInWithGoogle(auth);
   useEffect(() => {
     onSnapshot(collection(db, "users"), (snapshot) => {
       const getValue = snapshot.docs.map((e) => e.data());
@@ -77,21 +78,38 @@ const Registration = () => {
     });
   }, []);
 
-  useEffect(() => {
-    if (done) {
-      for (const elements of hasUser) {
-        if (elements === done.user.email) {
-          addDoc(collection(db, "users"), {
-            name: done.user.displayName,
-            email: done.user.email,
-            create: new Date(),
-          });
+  if (done) {
+    const userID = doc(collection(db, "users"));
+    console.log(userID.id);
+    setDoc(userID, {
+      name: name,
+      email: email,
+      create: new Date(),
+    });
+  }
 
-          break;
-        }
-      }
-    }
-  }, [done, hasUser]);
+  // useEffect(() => {
+  //   if (done) {
+  //     const newCityRef = doc(collection(db, "cities"));
+  //     console.log(newCityRef.id);
+  //     setDoc(newCityRef, {
+  //       name: name,
+  //       email: email,
+  //       create: new Date(),
+  //     });
+
+  //     // for (const elements of hasUser) {
+  //     //   if (elements === done.user.email) {
+  //     //     addDoc(collection(db, "users"), {
+  //     //       name: done.user.displayName,
+  //     //       email: done.user.email,
+  //     //       create: new Date(),
+  //     //     });
+  //     //     break;
+  //     //   }
+  //     // }
+  //   }
+  // }, [done, hasUser]);
 
   if (done) {
     navigate(from, { replace: true });
