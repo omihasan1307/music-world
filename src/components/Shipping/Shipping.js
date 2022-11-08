@@ -15,8 +15,6 @@ const Shipping = () => {
   const [address, setAddress] = useState();
   const [phone, setPhone] = useState();
 
-  console.log(cart);
-
   const navigate = useNavigate();
 
   const handleNameBlur = (event) => {

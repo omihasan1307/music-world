@@ -7,8 +7,6 @@ const Videos = ({ myCourse }) => {
     <div>
       {course.map((e) => (
         <div>
-          {console.log(e.product)}
-
           <div className="row">
             <div className="col-12 col-md-4 d-flex justify-content-center align-items-center ">
               <div>
