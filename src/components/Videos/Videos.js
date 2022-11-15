@@ -3,9 +3,14 @@ import React from "react";
 const Videos = ({ myCourse }) => {
   const { course } = myCourse;
 
+  const courses = course.filter(
+    (element) => element.product.category === 'Course'
+  );
+
+
   return (
     <div>
-      {course.map((e) => (
+      {courses.map((e) => (
         <div>
           <div className="row">
             <div className="col-12 col-md-4 d-flex justify-content-center align-items-center ">
