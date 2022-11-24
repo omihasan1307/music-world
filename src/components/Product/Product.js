@@ -18,17 +18,7 @@ const Product = ({ allInstrument, handleAddToCart }) => {
     <div className=" col-12 col-md-4 d-flex justify-content-around align-items-center">
       <div className="product-card position-relative ">
         <div className="product-image ">
-          {/* {
-            status ? <iframe
-              width="560"
-              height="315"
-              src={video}
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe> : <img src={img} alt="" />
-          } */}
+
           <img src={img} alt="" />
         </div>
         <div className="product-details px-3">

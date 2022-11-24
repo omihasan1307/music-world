@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../../firebase.init";
@@ -47,13 +47,13 @@ const Contact = () => {
     }
   };
 
-  const getData = async () => {
-    const querySnapshot = await getDocs(collection(db, "contact"));
-    querySnapshot.forEach((doc) => {
-      console.log(doc.data());
-    });
-  };
-  getData();
+  // const getData = async () => {
+  //   const querySnapshot = await getDocs(collection(db, "contact"));
+  //   querySnapshot.forEach((doc) => {
+  //     console.log(doc.data());
+  //   });
+  // };
+  // getData();
   return (
     <div>
       <div>

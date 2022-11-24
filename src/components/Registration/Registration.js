@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -11,17 +10,14 @@ import { auth, db } from "../../firebase.init";
 import {
   addDoc,
   collection,
-  doc,
-  onSnapshot,
-  setDoc,
-  updateDoc,
+
 } from "firebase/firestore";
 
 const Registration = () => {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [hasUser, setHasUser] = useState([]);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -66,52 +62,21 @@ const Registration = () => {
         email: email,
         create: new Date(),
       });
-    } catch (e) {}
+    } catch (e) { }
   }
 
-  const [signInWithGoogle, done] = useSignInWithGoogle(auth);
-  useEffect(() => {
-    onSnapshot(collection(db, "users"), (snapshot) => {
-      const getValue = snapshot.docs.map((e) => e.data());
-
-      setHasUser(getValue.map((e) => e.email));
-    });
-  }, []);
-
-  if (done) {
-    const userID = doc(collection(db, "users"));
-    console.log(userID.id);
-    setDoc(userID, {
-      name: name,
-      email: email,
-      create: new Date(),
-    });
+  const [signInWithGoogle, google] = useSignInWithGoogle(auth);
+  if (google) {
+    try {
+      addDoc(collection(db, "users"), {
+        name: name,
+        email: email,
+        create: new Date(),
+      });
+    } catch (e) { }
   }
 
-  // useEffect(() => {
-  //   if (done) {
-  //     const newCityRef = doc(collection(db, "cities"));
-  //     console.log(newCityRef.id);
-  //     setDoc(newCityRef, {
-  //       name: name,
-  //       email: email,
-  //       create: new Date(),
-  //     });
-
-  //     // for (const elements of hasUser) {
-  //     //   if (elements === done.user.email) {
-  //     //     addDoc(collection(db, "users"), {
-  //     //       name: done.user.displayName,
-  //     //       email: done.user.email,
-  //     //       create: new Date(),
-  //     //     });
-  //     //     break;
-  //     //   }
-  //     // }
-  //   }
-  // }, [done, hasUser]);
-
-  if (done) {
+  if (google) {
     navigate(from, { replace: true });
   }
 

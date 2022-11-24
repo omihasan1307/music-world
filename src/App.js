@@ -43,7 +43,6 @@ function App() {
             </RequireAuth>
           }
         />
-
         <Route
           path="/shipping"
           element={
