@@ -127,6 +127,31 @@ body {
   text-decoration: underline;
 }
 
+.drp {
+  /* border: 1px solid yellow; */
+  padding: 8px;
+  border-radius: 23px;
+  background: #ec008c;
+}
+
+.drp-box {
+  /* border: 1px solid white; */
+  padding-top: 12px;
+}
+
+.drp-ul {
+  /* border: 1px solid green; */
+  list-style: none;
+}
+
+.drp-menu {
+  padding: 10px;
+}
+.drp-menu:hover {
+  background-color: #ec008c;
+  color: white;
+}
+
 @media only screen and (max-width: 688px) {
   .auth-main-cart {
     padding: 10px;

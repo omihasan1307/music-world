@@ -73,6 +73,46 @@ const Headers = () => {
               </span>
             </Link>
 
+            <div className="drp-box">
+              <ul className="drp-ul">
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle drp"
+                    href="#/"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    {user ? user.email.split("@gmail.com") : "Login"}
+                  </a>
+
+                  <ul class="dropdown-menu">
+                    <li>
+                      <Link to="/profile" className="nav-link drp-menu">
+                        Profile
+                      </Link>
+                    </li>
+
+                    <li>
+                      {user ? (
+                        <Link
+                          onClick={handleSignOut}
+                          to="/login"
+                          className="nav-link drp-menu"
+                        >
+                          Logout
+                        </Link>
+                      ) : (
+                        <Link to="/login" className="nav-link drp-menu">
+                          Log In
+                        </Link>
+                      )}
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            {/* 
             {user ? (
               <Link onClick={handleSignOut} to="/login" className="nav-link">
                 <button className="rounded-pill px-3 py-1 common-btn ms-3">
@@ -85,7 +125,7 @@ const Headers = () => {
                   Log In
                 </button>
               </Link>
-            )}
+            )} */}
 
             {/* {user ? <small>{user.email}</small> : <p></p>} */}
           </div>

@@ -5,7 +5,6 @@ import {
 } from "react-firebase-hooks/auth";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-// import auth from "../../firebase.init";
 import { auth } from "../../firebase.init";
 import Footer from "../Footer/Footer";
 
@@ -24,6 +23,8 @@ const Login = () => {
     const validEmail = /.+@(gmail|yahoo|outlook|mail|icloud|aol)\.com$/;
     if (event.target.value.match(validEmail)) {
       setEmail(event.target.value);
+    } else {
+      alert("Email is not valid");
     }
   };
 
@@ -32,6 +33,8 @@ const Login = () => {
       /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
     if (event.target.value.match(passwordValid)) {
       setPassword(event.target.value);
+    } else {
+      alert("Password is not valid");
     }
   };
 

@@ -1,12 +1,10 @@
 import React from "react";
 
-const Videos = ({ myCourse }) => {
-  const { course } = myCourse;
-
-  const courses = course.filter(
-    (element) => element.product.category === 'Course'
+const Videos = ({ course }) => {
+  const { cart } = course;
+  const courses = cart.filter(
+    (element) => element.product.category === "Course"
   );
-
 
   return (
     <div>

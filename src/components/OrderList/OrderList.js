@@ -4,7 +4,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const OrderList = ({ allOrderList, handleRemoveCart }) => {
   const { pId } = allOrderList;
-  const { productName, img, price, quantity } = allOrderList.product;
+  const { productName, img, price, category } = allOrderList.product;
   return (
     <div>
       <div className="orderListCart m-3 border-bottom">
@@ -14,7 +14,7 @@ const OrderList = ({ allOrderList, handleRemoveCart }) => {
         <div className="orderDetail">
           <h1>{productName}</h1>
           <h6 className="my-3">BDT {price}</h6>
-          <h6 className="mb-3">Quantity: {quantity}</h6>
+          <h6 className="mb-3">Category: {category}</h6>
           <button
             onClick={() => handleRemoveCart(pId)}
             className="border-0 px-3 py-1 common-btn rounded-pill"
