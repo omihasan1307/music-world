@@ -7,11 +7,7 @@ import {
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import { auth, db } from "../../firebase.init";
-import {
-  addDoc,
-  collection,
-
-} from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 
 const Registration = () => {
   const [name, setName] = useState();
@@ -34,12 +30,16 @@ const Registration = () => {
     const usernameRegex = /^[a-zA-Z]+ [a-zA-Z]+$/;
     if (event.target.value.match(usernameRegex)) {
       setName(event.target.value);
+    } else {
+      alert("Name is not valid");
     }
   };
   const handleEmailBlur = (event) => {
     const validEmail = /.+@(gmail|yahoo|outlook|mail|icloud|aol)\.com$/;
     if (event.target.value.match(validEmail)) {
       setEmail(event.target.value);
+    } else {
+      alert("Email is not valid");
     }
   };
   const handlePasswordBlur = (event) => {
@@ -47,6 +47,8 @@ const Registration = () => {
       /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
     if (event.target.value.match(passwordValid)) {
       setPassword(event.target.value);
+    } else {
+      alert("Password is not valid");
     }
   };
 
@@ -62,7 +64,7 @@ const Registration = () => {
         email: email,
         create: new Date(),
       });
-    } catch (e) { }
+    } catch (e) {}
   }
 
   const [signInWithGoogle, google] = useSignInWithGoogle(auth);
@@ -73,7 +75,7 @@ const Registration = () => {
         email: email,
         create: new Date(),
       });
-    } catch (e) { }
+    } catch (e) {}
   }
 
   if (google) {
@@ -94,7 +96,7 @@ const Registration = () => {
               <input
                 onBlur={handleNameBlur}
                 type="text"
-                placeholder="Enter your email"
+                placeholder="Enter your name"
                 className="input-field rounded-pill px-3 py-2"
                 required
               />

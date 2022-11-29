@@ -1,9 +1,9 @@
 import React from "react";
-import useCourse from "../../Hooks/useCourse";
+import useOrder from "../../Hooks/useOrder";
 import Videos from "../Videos/Videos";
 
 const PaidCourse = () => {
-  const [videos] = useCourse();
+  const [videos] = useOrder();
 
   return (
     <div className="container">
@@ -14,7 +14,7 @@ const PaidCourse = () => {
       ) : (
         <div className="mt-3">
           {videos.map((e) => (
-            <Videos key={e.cId} myCourse={e} />
+            <Videos course={e} />
           ))}
         </div>
       )}

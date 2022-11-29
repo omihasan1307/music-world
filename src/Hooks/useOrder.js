@@ -1,17 +1,18 @@
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, orderBy } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../firebase.init";
 
-const useCourse = () => {
-  const [course, setCourse] = useState([]);
+const useOrder = () => {
+  const [userOrder, setUserOrder] = useState([]);
   const [user] = useAuthState(auth);
   useEffect(() => {
     onSnapshot(
-      collection(db, `purchaseCourse/${user?.uid}/course`),
+      collection(db, `order/${user?.uid}/userOrder`),
+      orderBy("create", "desc"),
       (snapshot) => {
         const getValue = snapshot.docs.map((e) => e.data());
-        setCourse(getValue);
+        setUserOrder(getValue);
       },
       (error) => {
         console.log(error);
@@ -19,7 +20,7 @@ const useCourse = () => {
     );
   }, [user]);
 
-  return [course, setCourse];
+  return [userOrder, setUserOrder];
 };
 
-export default useCourse;
+export default useOrder;

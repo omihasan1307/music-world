@@ -7,13 +7,13 @@ import Home from "./components/Home/Home";
 import InstrumentShop from "./components/InstrumentShop/InstrumentShop";
 import Login from "./components/Login/Login";
 import OrderSummery from "./components/OrderSummery/OrderSummery";
-import Payment from "./components/Payment/Payment";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import Registration from "./components/Registration/Registration";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
 import Shipping from "./components/Shipping/Shipping";
 import "animate.css";
 import PaidCourse from "./components/PaidCourse/PaidCourse";
+import Profile from "./components/Profile/Profile";
 
 function App() {
   return (
@@ -21,6 +21,14 @@ function App() {
       <Headers />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route
+          path="/profile"
+          element={
+            <RequireAuth>
+              <Profile />
+            </RequireAuth>
+          }
+        />
         <Route path="/instruments" element={<InstrumentShop />} />
         <Route path="/courses" element={<CourseShop />} />
         <Route
@@ -48,14 +56,6 @@ function App() {
           element={
             <RequireAuth>
               <Shipping />
-            </RequireAuth>
-          }
-        />
-        <Route
-          path="/payment"
-          element={
-            <RequireAuth>
-              <Payment />
             </RequireAuth>
           }
         />
