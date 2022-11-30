@@ -52,7 +52,7 @@ const Registration = () => {
     }
   };
 
-  const handleCreateUser = async (event) => {
+  const handleCreateUser = (event) => {
     event.preventDefault();
     createUserWithEmailAndPassword(email, password);
   };
@@ -62,21 +62,22 @@ const Registration = () => {
       addDoc(collection(db, "users"), {
         name: name,
         email: email,
+        userId: user.user.uid,
         create: new Date(),
       });
     } catch (e) {}
   }
 
   const [signInWithGoogle, google] = useSignInWithGoogle(auth);
-  if (google) {
-    try {
-      addDoc(collection(db, "users"), {
-        name: name,
-        email: email,
-        create: new Date(),
-      });
-    } catch (e) {}
-  }
+  // if (google) {
+  //   try {
+  //     addDoc(collection(db, "users"), {
+  //       name: name,
+  //       email: email,
+  //       create: new Date(),
+  //     });
+  //   } catch (e) {}
+  // }
 
   if (google) {
     navigate(from, { replace: true });

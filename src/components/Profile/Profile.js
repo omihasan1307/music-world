@@ -39,12 +39,15 @@ const Profile = () => {
                   <h5>
                     <span className="title-text">Paid:</span> BDT {e.paid}
                   </h5>
-
                   <h5>
                     <span className="title-text">Time:</span>{" "}
                     {moment(e.time.seconds).format("MMMM Do YYYY")}
                   </h5>
-                  <button className="btn btn-success">Pending...</button>
+                  <button
+                    className={e.status ? "btn btn-success" : "btn btn-danger"}
+                  >
+                    {e.status ? "Processing" : "Pending"}
+                  </button>
                 </div>
               </div>
             ))}
