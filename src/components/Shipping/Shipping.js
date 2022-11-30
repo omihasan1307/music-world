@@ -1,5 +1,11 @@
-import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
+import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import StripeCheckout from "react-stripe-checkout";
@@ -57,7 +63,7 @@ const Shipping = () => {
   let grandTotal = (totalPrice + tax).toFixed(0);
 
   const onToken = async (token) => {
-    await addDoc(collection(db, `order/${user.uid}/userOrder`), {
+    const docRef = await addDoc(collection(db, `order/${user.uid}/userOrder`), {
       uid: user.uid,
       email: token.email,
       card: token.card.brand,
@@ -67,9 +73,21 @@ const Shipping = () => {
       address: address,
       phone: phone,
       cart: cart,
-      course: cart,
       time: new Date().toString(),
       create: new Date(),
+      status: false,
+    });
+
+    await updateDoc(doc(db, `order/${user.uid}/userOrder`, docRef.id), {
+      orderId: docRef.id,
+    });
+
+    console.log("Document written with ID: ", docRef.id);
+
+    await addDoc(collection(db, "userList"), {
+      userId: user.uid,
+      name: name,
+      email: email,
     });
 
     navigate("/");
