@@ -76,6 +76,7 @@ const Shipping = () => {
       time: new Date().toString(),
       create: new Date(),
       status: false,
+      processing: true,
     });
 
     await updateDoc(doc(db, `order/${user.uid}/userOrder`, docRef.id), {

@@ -68,21 +68,6 @@ const Registration = () => {
     } catch (e) {}
   }
 
-  const [signInWithGoogle, google] = useSignInWithGoogle(auth);
-  // if (google) {
-  //   try {
-  //     addDoc(collection(db, "users"), {
-  //       name: name,
-  //       email: email,
-  //       create: new Date(),
-  //     });
-  //   } catch (e) {}
-  // }
-
-  if (google) {
-    navigate(from, { replace: true });
-  }
-
   return (
     <div>
       <div className="container">
@@ -143,15 +128,6 @@ const Registration = () => {
 
             {loading && <p className="text-center">Loading...</p>}
             <div>
-              <button
-                onClick={() => signInWithGoogle()}
-                // onClick={() => creatSignInGoogle()}
-                className="w-100 p-2 rounded-pill mt-2"
-              >
-                <FcGoogle className="fs-4 me-2" /> Continue with Google
-              </button>
-
-              <hr />
               <p className="text-center mt-3">
                 Already Have an account?{" "}
                 <span className="text-primary  ms-2">

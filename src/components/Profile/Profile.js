@@ -46,7 +46,7 @@ const Profile = () => {
                   <button
                     className={e.status ? "btn btn-success" : "btn btn-danger"}
                   >
-                    {e.status ? "Processing" : "Pending"}
+                    {e.processing ? "Processing" : "Order Completed"}
                   </button>
                 </div>
               </div>

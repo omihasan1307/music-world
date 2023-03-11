@@ -47,11 +47,6 @@ const Login = () => {
     signInWithEmailAndPassword(email, password);
   };
 
-  const [signInWithGoogle, done] = useSignInWithGoogle(auth);
-  if (done) {
-    navigate(from, { replace: true });
-  }
-
   return (
     <div>
       <div className="container">
@@ -96,14 +91,6 @@ const Login = () => {
             </p>
             {loading && <p className="text-center">Loading...</p>}
             <div>
-              <button
-                onClick={() => signInWithGoogle()}
-                className="w-100 p-2 rounded-pill mt-2"
-              >
-                <FcGoogle className="fs-4 me-2" /> Continue with Google
-              </button>
-
-              <hr />
               <p className="text-center mt-3">
                 Don't Have an account?{" "}
                 <span className="text-primary  ms-2">
